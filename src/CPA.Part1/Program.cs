@@ -1,22 +1,28 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using System;
+using System.Threading.Tasks;
 
 namespace CPA.Part1
 {
     public class Program
     {
-        public static int Main(string[] args)
+        public static async Task Main(string[] args)
         {
             try
             {
                 using var host = BuildHost();
-                return 0;
+                
+                var orchestrator = host.Services.GetService<IOrchestrator>();
+                await orchestrator.Start();
+
+                Console.Read();
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return 1;
+                Console.WriteLine($"Something went wrong. {e.Message}");
             }
         }
 
@@ -38,6 +44,11 @@ namespace CPA.Part1
 
         static void ConfigureServices(HostBuilderContext context, IServiceCollection services)
         {
+            services.AddLogging(config => 
+            {
+                config.AddConsole();
+            });
+
             services.AddHttpClient("ResultsClient", client =>
             {
                 var baseAddress = context.Configuration.GetSection("ResultsBaseUrl")?.Value ?? string.Empty;
@@ -45,6 +56,9 @@ namespace CPA.Part1
                 client.BaseAddress = new Uri(baseAddress);
                 client.DefaultRequestHeaders.Add("Accept", "application/json");
             });
+
+            services.AddSingleton<IOrchestrator, Orchestrator>();
+            services.AddSingleton<IExtractor, Extractor>();
         }
     }
 }

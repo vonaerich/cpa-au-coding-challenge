@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace CPA.Part1
 {
-    public class Extractor
+    public class Extractor : IExtractor
     {
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly ILogger _logger;
 
-        public Extractor(IHttpClientFactory httpClientFactory, ILogger logger = null)
+        public Extractor(IHttpClientFactory httpClientFactory, ILogger<Extractor> logger = null)
         {
             _httpClientFactory = httpClientFactory;
             _logger = logger;
@@ -20,7 +20,7 @@ namespace CPA.Part1
 
         public async Task<IEnumerable<SubjectResult>> FetchResults()
         {
-            var httpClient = _httpClientFactory.CreateClient();
+            var httpClient = _httpClientFactory.CreateClient("ResultsClient");
             var response = await httpClient.GetAsync("api/results");
 
             if (!response.IsSuccessStatusCode)
@@ -31,5 +31,10 @@ namespace CPA.Part1
 
             return await response.Content.ReadFromJsonAsync<IEnumerable<SubjectResult>>();
         }
+    }
+
+    public interface IExtractor
+    {
+        Task<IEnumerable<SubjectResult>> FetchResults();
     }
 }
