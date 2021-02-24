@@ -4,14 +4,14 @@
 
 ### Part 1
 
-In root folder, run this command
+In root folder, run command
 ```
 .\scripts\run-part1.ps1
 ```
 
 ### Part 2
 
-In root folder, run this command
+In root folder, run command
 ```
 .\scripts\run-part2.ps1
 ```
