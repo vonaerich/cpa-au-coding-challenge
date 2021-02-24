@@ -1,4 +1,4 @@
-﻿using CPA.Part1.Models;
+﻿using CPA.Models;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Net.Http;

@@ -1,4 +1,4 @@
-﻿using CPA.Part1.Models;
+﻿using CPA.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

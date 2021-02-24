@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace CPA.Part1.Models
+namespace CPA.Models
 {
     public class SubjectResult
     {
