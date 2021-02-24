@@ -23,6 +23,7 @@ namespace CPA.Part1
             catch (Exception e)
             {
                 Console.WriteLine($"Something went wrong. {e.Message}");
+                Console.Read();
             }
         }
 
@@ -60,6 +61,7 @@ namespace CPA.Part1
             services.AddSingleton<IOrchestrator, Orchestrator>();
             services.AddSingleton<IExtractor, Extractor>();
             services.AddSingleton<ITransformer, Transformer>();
+            services.AddSingleton<IPrinter, Printer>(_ => new Printer(Console.Out));
         }
     }
 }

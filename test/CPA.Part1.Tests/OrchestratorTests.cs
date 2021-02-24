@@ -11,7 +11,8 @@ namespace CPA.Part1.Tests
         {
             var extractor = Substitute.For<IExtractor>();
             var transformer = Substitute.For<ITransformer>();
-            var orchestrator = new Orchestrator(extractor, transformer);
+            var printer = Substitute.For<IPrinter>();
+            var orchestrator = new Orchestrator(extractor, transformer, printer);
 
             await orchestrator.Start();
         }
