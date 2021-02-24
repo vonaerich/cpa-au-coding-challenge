@@ -1,0 +1,1 @@
+dotnet run --project ./src/CPA.Part2/CPA.Part2.csproj
