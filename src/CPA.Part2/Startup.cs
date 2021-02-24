@@ -1,10 +1,12 @@
 using CPA.Part2.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using System;
 
 namespace CPA.Part2
 {
@@ -20,6 +22,10 @@ namespace CPA.Part2
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // Using an in-memory database here. But can easily migrate to other database providers.
+            services.AddDbContext<ResultsContext>(options => options.UseInMemoryDatabase("ResultsDatabase"));
+
+            services.AddScoped<IResultsContext, ResultsContext>();
             services.AddTransient<IResultsService, ResultsService>();
 
             services.AddControllers();
@@ -47,6 +53,15 @@ namespace CPA.Part2
             {
                 endpoints.MapControllers();
             });
+
+            SeedDatabase(app);
+        }
+
+        private static void SeedDatabase(IApplicationBuilder app)
+        {
+            using var scope = app.ApplicationServices.CreateScope();
+            var dbContext = scope.ServiceProvider.GetRequiredService<ResultsContext>();
+            dbContext.Database.EnsureCreated();
         }
     }
 }
