@@ -10,7 +10,8 @@ namespace CPA.Part1.Tests
         public async Task RunsWithoutErrors()
         {
             var extractor = Substitute.For<IExtractor>();
-            var orchestrator = new Orchestrator(extractor);
+            var transformer = Substitute.For<ITransformer>();
+            var orchestrator = new Orchestrator(extractor, transformer);
 
             await orchestrator.Start();
         }

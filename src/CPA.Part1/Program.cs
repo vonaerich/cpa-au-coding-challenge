@@ -59,6 +59,7 @@ namespace CPA.Part1
 
             services.AddSingleton<IOrchestrator, Orchestrator>();
             services.AddSingleton<IExtractor, Extractor>();
+            services.AddSingleton<ITransformer, Transformer>();
         }
     }
 }

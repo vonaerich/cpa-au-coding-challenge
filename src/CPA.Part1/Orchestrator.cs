@@ -11,13 +11,16 @@ namespace CPA.Part1
     public class Orchestrator : IOrchestrator
     {
         private readonly IExtractor _extractor;
+        private readonly ITransformer _transformer;
         private readonly ILogger<Orchestrator> _logger;
 
         public Orchestrator(
             IExtractor extractor,
+            ITransformer transformer,
             ILogger<Orchestrator> logger = null)
         {
             _extractor = extractor;
+            _transformer = transformer;
             _logger = logger;
         }
 
@@ -25,10 +28,16 @@ namespace CPA.Part1
         public async Task Start()
         {
             // Extract
+            var results = await _extractor.FetchResults();
+
+            if (!results.Any())
+                return;
 
             // Transform
+            var transformedResults = _transformer.TransformResults(results);
 
             // Print
+            // _printer.PrintResults();
         }
     }
 
