@@ -1,4 +1,4 @@
-﻿using CPA.Part1.Models;
+﻿using CPA.Models;
 using System.Linq;
 using Xunit;
 
