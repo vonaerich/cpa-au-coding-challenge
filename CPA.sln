@@ -15,7 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CPA.Part2", "src\CPA.Part2\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CPA.Models", "src\CPA.Models\CPA.Models.csproj", "{ACF106BE-AB8B-49F2-9F72-6B259B1D53C5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CPA.Part2.Tests", "tests\CPA.Part2.Tests\CPA.Part2.Tests.csproj", "{CFFA8D6D-426E-470C-8C41-F306EF663134}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CPA.Part2.Tests", "test\CPA.Part2.Tests\CPA.Part2.Tests.csproj", "{CFFA8D6D-426E-470C-8C41-F306EF663134}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
